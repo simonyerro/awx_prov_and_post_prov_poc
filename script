@@ -1,0 +1,14 @@
+sudo apt install -y python-pip libssl-dev
+pip install molecule
+
+sudo apt install yamllint virtualbox apt-transport-https ca-certificates curl software-properties-common
+pip install ansible==2.7.0
+curl -fsSL https://goss.rocks/install | sudo GOSS_DST=/usr/local/sbin sh
+wget https://releases.hashicorp.com/vagrant/2.1.2/vagrant_2.1.2_x86_64.deb
+sudo dpkg -i vagrant_2.1.2_x86_64.deb
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt update
+sudo apt install docker-ce
+pip install python-vagrant
+pip install docker-py
