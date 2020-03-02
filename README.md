@@ -49,12 +49,24 @@ sudo apt install python
 
 ### Executing program
 
+#### Ansible
+
 ```bash
 # To verify that the connection is established well with the hosts
 ansible ec2 -i inventory -m ping
 # To run the playbook 
 ansible-playbook main.yml -i inventory --tags "mongo"
 ```
+#### Molecule
+
+```bash
+# To create default scenario of test 
+molecule init scenario --driver-name vagrant
+# To run the scenario 
+molecule test # You need to be into the role directory
+```
+
+
 
 ## Authors
 
