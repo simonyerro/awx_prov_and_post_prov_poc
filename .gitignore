@@ -1,3 +1,5 @@
 venv
 *.deb
 inventory
+__pycache__
+*.pyc

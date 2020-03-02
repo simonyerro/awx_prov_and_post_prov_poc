@@ -76,6 +76,5 @@ ex. [@simonyerro](https://www.linkedin.com/in/simon-yerro/)
 
 ## Acknowledgments
 
-Inspiration, code snippets, etc.
 * [based on this tuto](https://www.objectif-libre.com/fr/blog/2019/01/15/ansible-molecule/)
 
