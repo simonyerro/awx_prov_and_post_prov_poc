@@ -60,8 +60,8 @@ ansible-playbook main.yml -i inventory --tags "mongo"
 #### Molecule
 
 ```bash
-# To create default scenario of test 
-molecule init scenario --driver-name vagrant
+# To create default scenario of test with docker for environment of test and testinfra for test tools
+molecule init role docker --verifier-name testinfra --driver-name docker
 # To run the scenario 
 molecule test # You need to be into the role directory
 ```
