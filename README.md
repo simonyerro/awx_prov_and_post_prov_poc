@@ -12,11 +12,16 @@ It a simpler tool to learn and use compared to its contestant (Salt, Chef, Puppe
 
 ### Molecule
 
-[to complete]
+Molecule allows you to test Ansible playbooks. It is split into 3 operations:
+1. the driver create a test environment using **Docker**, **Vagrant** or **OpenStack**
+2. the provider launch the playbooks to test in the environment
+3. the verifier executes the test written
+
+The tests can be written with diverse tools like **testinfra**, **InSpec** or **goss**
 
 ### Ansible-lint
 
-[to complete]
+**Ansible Lint** is a command-line tool for linting playbooks.
 
 ## Getting Started
 
