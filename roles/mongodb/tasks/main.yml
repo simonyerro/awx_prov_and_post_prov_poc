@@ -1,17 +1,30 @@
-- name: MongoDB - Add repository
-  apt_repository:
-    repo: 'deb http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/3.2 multiverse'
-    filename: 'mongodb3.2'
+- name: MongoDB - Install MongoDB and Pip
+  apt:
+    pkg:
+    - mongodb
+    - pip
     state: present
     update_cache: yes
 
-- name: MongoDB - Install MongoDB
-  apt:
-    name: mongodb-org
-    state: present
-    update_cache: yes
+- name: MongoDB - Python packages
+  pip:
+    name:
+    - pymongo
 
 - name: MongoDB - Running state
   service:
-    name: mongod
+    name: mongodb
     state: started
+
+- name: MongoDB - Copy mongo.py file
+  copy:
+    src: mongo.py
+    dst: /home/simon/
+    owner: simon
+    group: simon
+    mode: '0700'
+
+- name: MongoDB - Run script mongo.py
+  script: /home/simon/mongo.py
+  args:
+    executable: python 3
