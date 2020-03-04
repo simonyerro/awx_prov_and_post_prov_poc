@@ -53,10 +53,13 @@ sudo apt install python
 
 ```bash
 # To verify that the connection is established well with the hosts
-ansible ec2 -i inventory -m ping
+ansible ec2 -i inventory -m ping # Note that you'll have to add your own inventory
 # To run the playbook 
 ansible-playbook main.yml -i inventory --tags "mongo"
 ```
+This playbook is very simple and there to show you the potential of Ansible.
+It will install mongo and necessary packages and run a local script on remote machine listed in the inventory
+
 #### Molecule
 
 ```bash
@@ -65,8 +68,6 @@ molecule init role docker --verifier-name testinfra --driver-name docker
 # To run the scenario 
 molecule test # You need to be into the role directory
 ```
-
-
 
 ## Authors
 
