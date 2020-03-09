@@ -1,9 +1,11 @@
+#!/usr/bin/python3
+
 from pymongo import MongoClient
 
 # pprint will make it prettier
 from pprint import pprint
 
-# connection go localhost MongoDB
+# connection to localhost MongoDB
 client = MongoClient("localhost")
 db=client.admin
 

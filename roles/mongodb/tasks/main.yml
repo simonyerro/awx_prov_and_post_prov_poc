@@ -12,30 +12,32 @@
     name: virtualenv
     executable: /usr/bin/pip3
 
-- name: MongoDB - Create virtualenv
-  command:
-    cmd: virtualenv "{{ path_file }}/venv"
+# - name: MongoDB - Create virtualenv
+#   command:
+#     cmd: virtualenv "{{ path_file }}/venv"
 
 - name: MongoDB - Python packages
   pip:
     name:
     - pymongo
-    virtualenv: "{{ path_file }}/venv"
+    # virtualenv: "{{ path_file }}/venv"
 
 - name: MongoDB - Running state
   service:
     name: mongodb
     state: started
 
-- name: MongoDB - Copy mongo.py file
-  copy:
-    src: mongo.py
-    dest: "{{ path_file }}"
-    owner: simon
-    group: simon
-    mode: '0700'
+# - name: MongoDB - Copy mongo.py file
+#   copy:
+#     src: mongo.py
+#     dest: "{{ path_file }}/"
+#     owner: simon
+#     group: simon
+#     mode: '0700'
 
 - name: MongoDB - Run script mongo.py
-  script: "{{ path_file }}/mongo.py"
+  script: 
+    free_form: mongo.py"
+    # remote_src: yes
   args:
-    executable: python 3
+    executable: /usr/bin/python3
