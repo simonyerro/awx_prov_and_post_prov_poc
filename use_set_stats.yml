@@ -1,13 +1,6 @@
 ---
 - hosts: localhost
   tasks:
-    - name: "Get test results from the web"
-      uri:
-        url: "{{ facts_to_gather }}"
-        return_content: true
-      register: results
-
-
     - name: "Output test results"
       debug:
-        msg: "{{ results.content }}"
+        msg: "{{ facts_to_gather.content }}"
