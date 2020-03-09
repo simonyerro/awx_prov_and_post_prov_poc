@@ -1,3 +1,4 @@
+---
 - hosts: ec2
   tasks:
     - name: "Artifact integration test results to the web"

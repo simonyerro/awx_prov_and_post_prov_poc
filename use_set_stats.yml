@@ -1,3 +1,4 @@
+---
 - hosts: localhost
   tasks:
     - name: "Get test results from the web"
