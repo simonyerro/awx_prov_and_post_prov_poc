@@ -2,10 +2,10 @@
 - hosts: ec2
   tasks:
     - name: "Artifact integration test results to the web"
-      local_action: 'shell curl -F "file=@testfile" https://file.io'
+      local_action: 'shell ls'
       register: result
 
     - name: "Artifact URL of test results to Tower Workflows"
       set_stats:
         data:
-          facts_to_gather:  "{{ (result.stdout|from_json).link }}"
+          facts_to_gather:  "{{ result.stdout }}"
