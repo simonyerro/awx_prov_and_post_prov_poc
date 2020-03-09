@@ -1,5 +1,7 @@
 ---
 - hosts: ec2
+  vars:
+    path_file: "/home/simon/mongo"
   become: true
   roles:
     - { role: mongodb, tags: ['mongo'] }

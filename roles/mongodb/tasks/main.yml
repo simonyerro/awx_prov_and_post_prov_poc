@@ -2,14 +2,25 @@
   apt:
     pkg:
     - mongodb
-    - pip
+    - python3-pip
+    - python-setuptools
     state: present
     update_cache: yes
+
+- name: MongoDB - Install virtualenv python package
+  pip:
+    name: virtualenv
+    executable: /usr/bin/pip3
+
+- name: MongoDB - Create virtualenv
+  command:
+    cmd: virtualenv "{{ path_file }}/venv"
 
 - name: MongoDB - Python packages
   pip:
     name:
     - pymongo
+    virtualenv: "{{ path_file }}/venv"
 
 - name: MongoDB - Running state
   service:
@@ -19,12 +30,12 @@
 - name: MongoDB - Copy mongo.py file
   copy:
     src: mongo.py
-    dst: /home/simon/
+    dest: "{{ path_file }}"
     owner: simon
     group: simon
     mode: '0700'
 
 - name: MongoDB - Run script mongo.py
-  script: /home/simon/mongo.py
+  script: "{{ path_file }}/mongo.py"
   args:
     executable: python 3
