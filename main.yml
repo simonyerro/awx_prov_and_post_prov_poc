@@ -1,13 +1,7 @@
 ---
 - hosts: ec2
-  gather_facts: False
-  hosts: localhost
   vars:
-    key_name: my_aws_aws
-    region: eu-west-1
-    image: ami-035966e8adab4aaad
-    sec_group: "{{ id }}-sec"
-
+    path_file: "/home/simon/mongo"
+  become: true
   roles:
-    - { role: aws_provisioning, tags: ['prov'] }
-    - { role: aws_post_provisioning, tags: ['post_prov'] }
+    - { role: mongodb, tags: ['mongo'] }
