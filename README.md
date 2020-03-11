@@ -50,15 +50,18 @@ sudo apt install python
 ### Executing program
 
 #### Ansible
-
 ```bash
 # To verify that the connection is established well with the hosts
 ansible ec2 -i inventory -m ping # Note that you'll have to add your own inventory
-# To run the playbook 
+# With time, I added multiple playbook
+# To run a basic mongo install
 ansible-playbook main.yml -i inventory --tags "mongo"
 ```
-This playbook is very simple and there to show you the potential of Ansible.
-It will install mongo and necessary packages and run a local script on remote machine listed in the inventory
+```
+# To provision ec2 instance
+# host supposed to have appropriate role
+ansible-playbook aws_ec2_provisioning.yml -i inventory --tags create_ec2 --extra-vars id="an_id"
+```
 
 #### Molecule
 

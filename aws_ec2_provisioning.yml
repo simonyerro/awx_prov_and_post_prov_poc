@@ -9,7 +9,7 @@
     key_name: my_aws_aws
     region: eu-west-1
     image: ami-035966e8adab4aaad
-    id: "sye_test_ansible"
+    # id: "sye_test_ansible2"
     sec_group: "{{ id }}-sec"
 
   tasks:
@@ -18,14 +18,14 @@
       block:
 
       - name: Get instances facts
-        ec2_instance_facts:
+        ec2_instance_info:
           region: "{{ region }}"
         register: result
 
-      - name: Instances ID
-        debug:
-          msg: "ID: {{ item.instance_id }} - State: {{ item.state.name }} - Public DNS: {{ item.public_dns_name }}"
-        loop: "{{ result.instances }}"
+      # - name: Instances ID
+      #   debug:
+      #     msg: "ID: {{ item.instance_id }} - State: {{ item.state.name }} - Public DNS: {{ item.public_dns_name }}"
+      #   loop: "{{ result.instances }}"
 
       tags: 'always'
 
@@ -55,13 +55,21 @@
           instance_type: t2.micro
           region: "{{ region }}"
           wait: true
-          count: 1
           exact_count: 1
           count_tag:
             Name: sye_test_ansible
           instance_tags:
             Name: sye_test_ansible
             to_post_provision: yes
+        register: ec2_info
 
+      - name: "debug instance popped"
+        debug:
+            msg: "instances_info: {{ ec2_info }}" 
+      
+      - name: "Make available vminfo for next jobs"
+        set_stats:
+          data:
+            facts_to_gather:  "{{ ec2_info }}"
 
       tags: ['never', 'create_ec2']

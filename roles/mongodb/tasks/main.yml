@@ -27,14 +27,6 @@
     name: mongodb
     state: started
 
-# - name: MongoDB - Copy mongo.py file
-#   copy:
-#     src: mongo.py
-#     dest: "{{ path_file }}/"
-#     owner: simon
-#     group: simon
-#     mode: '0700'
-
 - name: MongoDB - Run script mongo.py
   script: 
     free_form: mongo.py"
