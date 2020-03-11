@@ -9,15 +9,13 @@
     key_name: my_aws_aws
     region: eu-west-1
     image: ami-035966e8adab4aaad
-    # id: "sye_test_ansible2"
     sec_group: "{{ id }}-sec"
 
   tasks:
 
-    - name: Facts
+    - name: "Facts"
       block:
-
-      - name: Get instances facts
+      - name: "Get instances facts"
         ec2_instance_info:
           region: "{{ region }}"
         register: result
@@ -30,10 +28,10 @@
       tags: 'always'
 
 
-    - name: Provisioning EC2 instances
+    - name: "Provisioning EC2 instances"
       block:
 
-      - name: Create security group
+      - name: "Create security group"
         ec2_group:
           name: "{{ sec_group }}"
           description: "Sec group for app {{ id }}"
@@ -47,7 +45,7 @@
               rule_desc: allow all on ssh port
         register: result_sec_group
 
-      - name: Provision instance(s)
+      - name: "Provision instance(s)"
         ec2:
           id: "{{ id }}"
           group_id: "{{ result_sec_group.group_id }}"
@@ -57,9 +55,9 @@
           wait: true
           exact_count: 1
           count_tag:
-            Name: sye_test_ansible
+            Name: "sye_test_ansible"
           instance_tags:
-            Name: sye_test_ansible
+            Name: "sye_test_ansible"
             to_post_provision: yes
         register: ec2_info
 
