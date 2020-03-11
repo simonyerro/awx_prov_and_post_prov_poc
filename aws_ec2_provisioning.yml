@@ -12,7 +12,6 @@
     sec_group: "{{ id }}-sec"
 
   tasks:
-
     - name: "Facts"
       block:
       - name: "Get instances facts"
@@ -30,7 +29,6 @@
 
     - name: "Provisioning EC2 instances"
       block:
-
       - name: "Create security group"
         ec2_group:
           name: "{{ sec_group }}"
