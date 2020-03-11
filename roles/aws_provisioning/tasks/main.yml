@@ -1,9 +1,9 @@
-- name: Get instances facts
+- name: get instances facts
   ec2_instance_info:
     region: "{{ region }}"
   register: result
 
-- name: Create security group
+- name: create security group
   ec2_group:
     name: "{{ sec_group }}"
     description: "Sec group for app {{ id }}"
@@ -16,7 +16,7 @@
         rule_desc: allow all on ssh port
   register: result_sec_group
 
-- name: Provision instance(s)
+- name: provision instance(s)
   ec2:
     id: "{{ id }}"
     group_id: "{{ result_sec_group.group_id }}"
@@ -36,7 +36,7 @@
   debug:
       msg: "instances_info: {{ ec2_info }}" 
 
-- name: Make available vminfo for next jobs
+- name: make available vm info for next jobs
   set_stats:
     data:
       facts_to_gather:  "{{ ec2_info }}"
