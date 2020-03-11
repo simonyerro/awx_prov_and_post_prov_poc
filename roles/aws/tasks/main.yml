@@ -42,5 +42,3 @@
   set_stats:
     data:
       facts_to_gather:  "{{ ec2_info }}"
-
-tags: ['never', 'create_ec2']
