@@ -12,17 +12,10 @@
     sec_group: "{{ id }}-sec"
 
   tasks:
-    - name: "Facts"
-      block:
-      - name: "Get instances facts"
-        ec2_instance_info:
-          region: "{{ region }}"
-        register: result
-
-      # - name: Instances ID
-      #   debug:
-      #     msg: "ID: {{ item.instance_id }} - State: {{ item.state.name }} - Public DNS: {{ item.public_dns_name }}"
-      #   loop: "{{ result.instances }}"
+    - name: "Get instances facts"
+      ec2_instance_info:
+        region: "{{ region }}"
+      register: result
 
       tags: 'always'
 
@@ -33,7 +26,6 @@
         ec2_group:
           name: "{{ sec_group }}"
           description: "Sec group for app {{ id }}"
-          # vpc_id: 12345
           region: "{{ region }}"
           rules:
             - proto: tcp
