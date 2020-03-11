@@ -3,8 +3,6 @@
     region: "{{ region }}"
   register: result
 
-  tags: 'always'
-
 - name: Create security group
   ec2_group:
     name: "{{ sec_group }}"
