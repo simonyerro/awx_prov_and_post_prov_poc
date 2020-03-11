@@ -3,3 +3,4 @@ venv
 inventory
 __pycache__
 *.pyc
+awx_key
