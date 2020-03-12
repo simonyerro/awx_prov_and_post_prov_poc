@@ -1,7 +1,8 @@
-- name: Get instances facts
-  ec2_instance_info:
-    region: "{{ region }}"
-  register: result
+---
+# - name: Get instances facts
+#   ec2_instance_info:
+#     region: "{{ region }}"
+#   register: result
 
 - name: Create security group
   ec2_group:
