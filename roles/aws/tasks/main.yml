@@ -40,4 +40,4 @@
 - name: Make available vminfo for next jobs
   set_stats:
     data:
-      facts_to_gather:  "{{ ec2_info }}"
+      ec2_info:  "{{ ec2_info }}"
