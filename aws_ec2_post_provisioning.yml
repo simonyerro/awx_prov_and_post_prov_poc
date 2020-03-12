@@ -5,7 +5,5 @@
       local_action: 'shell ls'
       register: result
 
-    - name: "Artifact URL of test results to Tower Workflows"
-      set_stats:
-        data:
-          facts_to_gather:  "{{ result.stdout }}"
+    - name: "Debug"
+      debug:  "{{ result.stdout }}"

@@ -17,8 +17,18 @@
         rule_desc: allow all on ssh port
   register: result_sec_group
 
+- name: Create new key pair
+  ec2_key:
+    name: id_rsa
+  register: ec2_key
+
+- name: Save private key
+  copy: content="{{ ec2_key.key.private_key }}" dest="../aws-private.pem" mode=0600
+  when: ec2_key.changed
+
 - name: Provision instance(s)
   ec2:
+    key_name: "id_rsa"
     id: "{{ id }}"
     group_id: "{{ result_sec_group.group_id }}"
     image: "{{ image }}"
@@ -41,3 +51,4 @@
   set_stats:
     data:
       ec2_info:  "{{ ec2_info }}"
+      private_key: "{{ }}"
