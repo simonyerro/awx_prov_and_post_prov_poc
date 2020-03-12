@@ -1,5 +1,5 @@
 ---
-- hosts: "{{ ec2_info.instances.public_ip }}"
+- hosts: "{{ ec2_info.tagged_instances.public_ip }}"
   tasks:
     - name: "Artifact integration test results to the web"
       local_action: 'shell ls'

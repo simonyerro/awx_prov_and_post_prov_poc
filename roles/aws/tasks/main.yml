@@ -35,7 +35,7 @@
 
 - name: debug instance popped
   debug:
-      msg: "instances_info: {{ ec2_info }}" 
+      msg: "instances_info: {{ ec2_info.tagged_instances.public_ip }}" 
 
 - name: Make available vminfo for next jobs
   set_stats:
