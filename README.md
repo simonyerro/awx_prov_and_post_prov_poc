@@ -1,6 +1,7 @@
-# Ansible and Molecule
+# AWX provisioning and post-provisioning POC
 
-Simple overview of Ansible and Molecule
+Github project of ansible playbooks which provisionate and post-provisionate vm based on vmware.
+They're called on a workflow template on awx and post-provisionate playbook supposed to gather public ip address of new vm to ssh and run on them
 
 ## Description
 
@@ -10,6 +11,15 @@ Ansible is an open-source tool that allows you to manage, infrastructure by auto
 In other words, you can easily execute scripts to remote servers via ssh.
 It a simpler tool to learn and use compared to its contestant (Salt, Chef, Puppet)
 
+### AWX
+
+AWX is the open-source version of Ansible Tower. It is basically a graphic interface on ansible but also add multiple functionnalities like:
+* Dynamic inventories for providers (aws ec2, vmware, rhel...)
+* Workflows of multiples playbooks
+* Monitoring for jobs launched
+* Scheduling for jobs (based on cron)
+* Implementation of notification (based on Slack, Grafana...)
+
 ### Molecule
 
 Molecule allows you to test Ansible playbooks. It is split into 3 operations:
@@ -17,11 +27,11 @@ Molecule allows you to test Ansible playbooks. It is split into 3 operations:
 2. the provider launch the playbooks to test in the environment
 3. the verifier executes the test written
 
-The tests can be written with diverse tools like **testinfra**, **InSpec** or **goss**
+The tests can be written with diverse tools like **testinfra**, **InSpec** or **Ansible** itself
 
 ### Ansible-lint
 
-**Ansible Lint** is a command-line tool for linting playbooks.
+**Ansible-lint** is a command-line tool for linting playbooks.
 
 ## Getting Started
 
@@ -53,14 +63,12 @@ sudo apt install python
 ```bash
 # To verify that the connection is established well with the hosts
 ansible ec2 -i inventory -m ping # Note that you'll have to add your own inventory
-# With time, I added multiple playbook
-# To run a basic mongo install
-ansible-playbook main.yml -i inventory --tags "mongo"
 ```
 ```
 # To provision ec2 instance
-# host supposed to have appropriate role
-ansible-playbook aws_ec2_provisioning.yml -i inventory --tags create_ec2 --extra-vars id="an_id"
+# host machine supposed to have appropriate role
+# if not you'll need to specify aws_access_key_id and aws_secret_access_key
+ansible-playbook aws_ec2_provisioning.yml -i inventory --tags create_ec2 --extra-vars id="an_unique_id_for_your_instance"
 ```
 
 #### Molecule
