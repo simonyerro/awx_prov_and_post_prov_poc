@@ -20,6 +20,7 @@
 - name: Create new key pair
   ec2_key:
     name: id_rsa
+    region: "{{ region }}"
   register: ec2_key
 
 - name: Save private key
