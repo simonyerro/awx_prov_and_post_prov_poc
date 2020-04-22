@@ -1,6 +1,0 @@
----
-- hosts: localhost
-  tasks:
-    - name: "Output test results"
-      debug:
-        msg: "{{ facts_to_gather }}"

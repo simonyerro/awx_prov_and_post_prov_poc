@@ -1,9 +1,0 @@
----
-- hosts: "{{ ec2_info.tagged_instances[0].public_ip }}"
-  tasks:
-    - name: "Artifact integration test results to the web"
-      local_action: 'shell ls'
-      register: result
-
-    - name: "Debug"
-      debug:  "{{ result.stdout }}"

@@ -1,0 +1,36 @@
+- name: VM Provisioning
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: Include VMware VM provisioning role
+      include_role:
+        name: vmware-vm-provisioning
+
+    - name: set IP
+      set_fact:
+        ip: "{{ vm_info.instance.hw_eth0.ipaddresses[1] }}"
+
+    - name: Update inventory for post-provisioning
+      uri:
+        url: "{{ inventory_url }}"
+        method: POST
+        validate_certs: no
+        headers:
+          Authorization: "Bearer {{ token }}"
+        body: {"name": "{{ ip }}" ,"enabled": "true"}
+        body_format: json
+        status_code: 201, 204
+      register: response
+      changed_when: response.status == 201
+ 
+    - name: Make available vm info for next jobs
+      set_stats:
+        data:
+          vm_info:  "{{ vm_info }}"
+
+    - debug:
+        msg: 
+         - "{{ response.status }}" 
+         - "{{ inventory_url }}"
+         - "{{ folder }}"

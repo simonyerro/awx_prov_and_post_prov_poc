@@ -1,0 +1,17 @@
+- name: VM Provisioning
+  hosts: "{{ ip }}"
+  become: true
+  gather_facts: yes
+  tasks:
+          
+    - name: Create new file
+      file:  
+        state: touch
+        path: ~/test.txt
+
+    - name: Get file content
+      shell: cat /home/awx/test2.txt
+      register: test2_content
+
+    - debug:
+        msg: "{{ test2_content }}"

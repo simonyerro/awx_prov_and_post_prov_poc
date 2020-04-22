@@ -1,0 +1,15 @@
+---
+ - name:  Clone a virtual machine from OS template
+   vmware_guest:
+     validate_certs: no
+     datacenter: "{{ datacenter }}"
+     state: poweredon
+     folder: "{{ folder }}"
+     template: "{{ template }}"
+     name: "{{ vm_name }}"
+     cluster: "{{ cluster }}"
+     datastore: "{{ datastore }}"
+     customization_spec: "{{ custom_spec }}"
+     wait_for_ip_address: True
+
+   register: vm_info
